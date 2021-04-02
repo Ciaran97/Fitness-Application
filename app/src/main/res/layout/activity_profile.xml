@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity"
+
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="405dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:background="@drawable/backgroundgradient"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/imgProfilePic"
+                android:layout_marginTop="50dp"
+                android:onClick="Change_pp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:src="@drawable/pp"
+                />
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:text=""
+                android:textColor="#FFF"
+                android:textStyle="bold"
+                android:textSize="21sp"/>
+
+
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="400dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="275dp"
+            >
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Photos"
+                        android:textSize="20sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="125"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:paddingTop="10dp"
+                        android:textColor="@android:color/holo_blue_dark"
+                        />
+
+            </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Steps"
+                        android:textSize="20sp"/>
+                    <TextView
+                        android:id="@+id/lblUpdateSteps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:paddingTop="10dp"
+                        android:textColor="@android:color/holo_blue_dark"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weight"
+                        android:textSize="20sp"/>
+                    <TextView
+                        android:id="@+id/weightCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:paddingTop="10dp"
+                        android:textColor="@android:color/holo_blue_dark"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="55dp"
+    >
+    <TextView
+        android:id="@+id/lblGoals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Goals"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginStart="100dp"
+
+        android:textColor="@android:color/black"/>
+
+    <RelativeLayout
+        android:layout_below="@id/lblGoals"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginEnd="55dp"
+        android:layout_marginStart="55dp"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:rowCount="2"
+        android:columnCount="2"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="40dp"
+        android:id="@+id/LL"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weight Goal: "
+            android:id="@+id/lblWeight"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:layout_marginStart="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Daily Step Goal: "
+            android:id="@+id/lblSteps"
+            android:gravity="end"
+            android:textStyle="italic"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="WeightGoal"
+            android:id="@+id/txtWeightGoal"
+
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:layout_marginStart="80dp"
+            android:padding="10dp"
+            android:hint="Step Goal"
+            android:id="@+id/txtStepGoal"
+            android:layout_width="105dp"
+            android:layout_height="45dp"/>
+
+    </GridLayout>
+
+
+
+
+</RelativeLayout>
+
+
+
+            <TextView
+                android:id="@+id/lblAboutYou"
+                android:layout_marginTop="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About You"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginStart="100dp"
+
+                android:textColor="@android:color/black"/>
+
+            <RelativeLayout
+                android:layout_below="@id/lblAboutYou"
+                android:layout_width="match_parent"
+                android:id="@+id/RLAU"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="55dp"
+                android:layout_marginStart="55dp"/>
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/RLAU"
+            android:layout_marginStart="50dp"
+            android:columnCount="2"
+            android:rowCount="4"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/lblGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:textStyle="italic" />
+
+
+            <TextView
+                android:id="@+id/lblBirthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:gravity="end"
+                android:text="Birthday"
+                android:textStyle="italic" />
+
+
+            <Spinner
+                android:id="@+id/spinGender"
+                android:layout_width="105dp"
+                android:layout_height="45dp" />
+
+            <EditText
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginBottom="20dp"
+                android:autofillHints=""
+                android:focusable="true"
+                android:hint="Select Birthday"
+                android:inputType="date"
+                android:onClick="Choose_Date"
+                tools:targetApi="o" />
+
+            <TextView
+                android:id="@+id/lblWeight1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weight"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/lblHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:gravity="end"
+                android:text="Height"
+                android:textStyle="italic" />
+
+            <EditText
+                android:id="@+id/txtWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Weight" />
+
+            <EditText
+                android:id="@+id/txtHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:hint="Height" />
+
+
+
+        </GridLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update"
+                android:onClick="update_Profile"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:padding="15dp"
+
+                android:layout_alignParentEnd="true"
+                android:textAlignment="center"
+                android:layout_centerInParent="true"
+                android:layout_alignParentStart="true"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

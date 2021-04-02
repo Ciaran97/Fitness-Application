@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "937982377840",
+    "firebase_url": "https://vcfitness-e2b81.firebaseio.com",
+    "project_id": "vcfitness-e2b81",
+    "storage_bucket": "vcfitness-e2b81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937982377840:android:3bab15bd2a4b1b082519b5",
+        "android_client_info": {
+          "package_name": "com.example.vcfitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "937982377840-37mv0tdeo2aqo0mjh1aobiv9nhnm8teu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vcfitness",
+            "certificate_hash": "f9a215239c9e7e8747cb295ed1611509a0a37d65"
+          }
+        },
+        {
+          "client_id": "937982377840-jrt6a818hll85cq9t84b3h6orh3vbl4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAppvAHxXpqlsibP9qxnobGt9msuGeSMYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "937982377840-jrt6a818hll85cq9t84b3h6orh3vbl4p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
