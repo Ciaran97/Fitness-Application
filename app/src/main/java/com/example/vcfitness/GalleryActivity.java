@@ -52,9 +52,9 @@ public class GalleryActivity extends AppCompatActivity {
 
         storage = FirebaseStorage.getInstance();
 
-mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
-Uid = mAuth.getUid();
+        Uid = mAuth.getUid();
     }
 
 
@@ -73,10 +73,6 @@ Uid = mAuth.getUid();
             public void onClick(DialogInterface dialog, int item) {
                 if (options[item].equals("Take Photo"))
                 {
-                   // Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                   // File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
-                   // intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-                   // startActivityForResult(intent, REQUEST_CAMERA);
 
                     dispatchTakePictureIntent();
                 }
@@ -100,7 +96,6 @@ Uid = mAuth.getUid();
                 resultCode == RESULT_OK) {
             if (data != null && data.getExtras() != null) {
                 Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
-               // mImageView.setImageBitmap(imageBitmap);
                 uploadImage(imageBitmap);
             }
         }
@@ -117,7 +112,6 @@ Uid = mAuth.getUid();
 
                     e.printStackTrace();
                 }
-                // mImageView.setImageBitmap(imageBitmap);
                 uploadImage(imageBitmap);
             }
         }

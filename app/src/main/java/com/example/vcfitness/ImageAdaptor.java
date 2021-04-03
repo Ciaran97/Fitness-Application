@@ -13,6 +13,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+
+//class used to display gallery images in the gallery activity
+
 public class ImageAdaptor extends RecyclerView.Adapter<ImageAdaptor.ImageViewHolder> {
     private Context mContext;
     private List<String> mString;

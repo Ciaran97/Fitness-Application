@@ -60,10 +60,10 @@ public class GoalsActivity extends AppCompatActivity {
 
         barchart = findViewById(R.id.BarChart);
 
-final ArrayList<String> ArrDay = GetDateFormat();
+        final ArrayList<String> ArrDay = GetDateFormat();
 
 
-
+        //set each day to the X axis of the barchart
         XAxis xAxis = barchart.getXAxis();
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
@@ -81,7 +81,7 @@ final ArrayList<String> ArrDay = GetDateFormat();
         });
 
 
-
+        //add entries to the barchart to populate the data (barchart of weight)
         barEntries = new ArrayList<>();
 
         barEntries.add(new BarEntry(0, Integer.parseInt(strWeights.get(0))));
@@ -107,7 +107,7 @@ final ArrayList<String> ArrDay = GetDateFormat();
     private void LoadProfileInfo()
     {
 
-
+        //load information of the users profile stored in firebase.
         DocumentReference docRef = db.collection("DailyWeight").document(strUid);
 
         docRef
@@ -142,6 +142,7 @@ final ArrayList<String> ArrDay = GetDateFormat();
         });
     }
 
+    //set get all times in milli seconds and add to new array in updated time format
     private ArrayList<String> GetDateFormat(){
 
         DateFormat format = new SimpleDateFormat("E");

@@ -70,6 +70,7 @@ private static final String TAG = "MainActivity";
         }
         else{
             //signIn();
+            //logs user in using given email and password
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override

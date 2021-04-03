@@ -48,6 +48,8 @@ public class ImagesActivity extends AppCompatActivity {
 
     ArrayList<String> strUrls = new ArrayList<>();
     @Override
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
@@ -57,7 +59,7 @@ public class ImagesActivity extends AppCompatActivity {
         recycleView = findViewById(R.id.recycler_view);
         recycleView.setHasFixedSize(true);
         recycleView.setLayoutManager(new LinearLayoutManager(this));
-LoadProfileInfo();
+        LoadProfileInfo();
 
 
 
@@ -73,7 +75,7 @@ LoadProfileInfo();
 
 
         DocumentReference docRef = db.collection("StoredImages").document(strUid);
-
+        //get all URL's from firestore for a particular user and add them to a list of URL's
         docRef
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()

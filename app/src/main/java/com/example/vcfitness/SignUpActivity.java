@@ -47,6 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        //initialise all input boxes for the signup form
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         etPassword2 = findViewById(R.id.etPassword2);
@@ -82,11 +83,12 @@ public class SignUpActivity extends AppCompatActivity {
        final String password = etPassword.getText().toString();
         String password2 = etPassword2.getText().toString();
 
-
+        //check if Email, password, or confirm password is empty
         if(Email == "" || password == "" || password2 == "")
         {
            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_LONG).show();
         }
+        //check to see if password and confirm password fields are the same
             else  if(password.equals(password2))
             {
                 mAuth.createUserWithEmailAndPassword(Email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
@@ -124,7 +126,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-
+    //create a document in firestore foor each new user to store data on profile
     public void insertUserDetails(String userid)
     {
 
@@ -166,6 +168,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    //log a user in using email and password
     public void signIn(String email, String password){
 
         mAuth.signInWithEmailAndPassword(email, password)
@@ -181,7 +184,7 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(SignUpActivity.this, "Authentication successful.", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
 
-
+                            //once signed in navigate to the dashboard activity
                             Intent intents = new Intent(SignUpActivity.this, Dashboard.class);
 
                             startActivity(intents);

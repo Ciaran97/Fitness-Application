@@ -168,6 +168,7 @@ storageRef.getFile(localFile)
       });
   }
 
+  //select image from user gallery or snap a picture using the camera
     private void selectImage() {
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
         AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
@@ -175,6 +176,8 @@ storageRef.getFile(localFile)
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
+
+                //use camera to take a picture
                 if (options[item].equals("Take Photo"))
                 {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -182,6 +185,7 @@ storageRef.getFile(localFile)
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
                     startActivityForResult(intent, REQUEST_CAMERA);
                 }
+                //choose a picture from the gallery
                 else if (options[item].equals("Choose from Gallery"))
                 {
                     Intent intent = new   Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -198,6 +202,8 @@ storageRef.getFile(localFile)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
     {
+
+        //add the image to an imageview to see the picture before uploading
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == SELECT_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
@@ -228,14 +234,13 @@ storageRef.getFile(localFile)
 
         if(uripp != null)
         {
-
+            //add the image to firebase storage and set the url to the users display picture when 'SaveUserInfo() is called
              profileRef = mStorageRef.child("ProfilePictures/" + mAuth.getUid() + ".jpg");
 
             profileRef.putFile(uripp).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                   // profileimageUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
                     profileimageUrl = profileRef.getDownloadUrl().toString();
                     saveUserInfo();
 
@@ -283,6 +288,7 @@ storageRef.getFile(localFile)
         Datetxt.setText(sdf.format(myCalender.getTime()));
     }
 
+    //load all spinners (dropdown selection)
     private void LoadSpinners(){
 
         //Gender spinner
@@ -303,6 +309,8 @@ storageRef.getFile(localFile)
 
     }
 
+
+    //update users profile in firestore with any updated information
     public void update_Profile(View view) {
 
         int weightgoal = Integer.parseInt(txtWeightGoal.getText().toString());
@@ -344,14 +352,23 @@ storageRef.getFile(localFile)
 
     }
 
+
+    //load users profile information from firestore into a local object
     private void LoadProfileInfo()
     {
+
+        //get current firebase user
         FirebaseUser user = mAuth.getCurrentUser();
 
+        //get user Id from user
         String strUid = user.getUid();
 
+
+        //set a document reference with the userID
         DocumentReference docRef = db.collection("users").document(strUid);
 
+
+        //get all data in the document and store into a local object
         docRef
                 .get()
         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

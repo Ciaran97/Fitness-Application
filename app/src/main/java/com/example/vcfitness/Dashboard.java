@@ -73,18 +73,19 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
+        //initialize all declared variables
         mAuth = FirebaseAuth.getInstance();
         imageview = findViewById(R.id.imageviewD);
         Fullname = findViewById(R.id.lblFullName);
         cardWeight = findViewById(R.id.CardWeight);
         steps = findViewById(R.id.txtSteps);
 
+        //get preferences
         final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         DaysSteps = pref.getInt("Steps", 0);
         LoadProfileInfo();
 
-        //For Step Counter
+        //sensor For Step Counter
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         // Set the alarm to start at approximately 2:00 p.m.
@@ -92,13 +93,14 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
     }
 
 
-
+    //profile button to load profile activity
     public void btnProfile(View view) {
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
 
     }
 
+    //logout of firebase account
     public void Logout(View view) {
 
         FirebaseAuth.getInstance().signOut();
@@ -110,6 +112,7 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
 
     }
 
+    //load profile picture from firebase
     private void loadProfilePicture() throws IOException {
 
         String pictureUrl = mAuth.getCurrentUser().getPhotoUrl().toString();
@@ -149,11 +152,12 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
 
         // Set up the input
         final EditText input = new EditText(this);
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(input);
 
-// Set up the buttons
+        // Set up the buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
         {
             @Override
@@ -196,13 +200,13 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
 
 
 
-
+            //get time in milliseconds
             Long TimeMilli =  System.currentTimeMillis();
            
 
                 user.put(TimeMilli.toString(), newWeight);
 
-
+                //add new weight to daily weight collection
                 DocumentReference docRef = db.collection("DailyWeight/").document(userid);
 
                 docRef.set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>()
@@ -248,7 +252,7 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
 
 
         DocumentReference docRef = db.collection("users").document(strUid);
-
+        //get profile info of current user
         docRef
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -258,17 +262,19 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
                             DocumentSnapshot document = task.getResult();
                             if (document.exists())
                             {
+                                //get Firstname and surname to load into a full name variable
                                 String fullname = document.get("firstName").toString() + " " + document.get("surname").toString();
 
                                 Fullname.setText(fullname);
 
-
+                                //get weight from profile
                                 if(document.get("weight") != null)
                                 {
                                    // txtWeight.setText(document.get("weight").toString());
                                     cardWeight.setText(document.get("weight").toString());
                                 }
 
+                                //get the step goal from the user document
                                 if(document.get("step_goal") != null)
                                 {
 
@@ -293,6 +299,7 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
+       // when the sesor detects a step add one strep to the DaysSteps vairable
         if(running) {
          DaysSteps++;
          steps.setText(DaysSteps + "/" + StepGoal);
@@ -310,6 +317,7 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
 
     @Override
     protected void onResume() {
+        //when app is opened initialise the step counter sensor and register it
         super.onResume();
         running = true;
         Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
@@ -324,6 +332,7 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
 
     @Override
     protected void onPause() {
+        //when app is closed set running variable to false to only track steps when app is open
         super.onPause();
         running = false;
 
@@ -331,11 +340,13 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
         //sensorManager.unregisterListener(this);
     }
 
+    //inserts daily steps into firestore
     private void InsertStepsDB(){
         String userid = mAuth.getUid();
 
         Map<String, Object> user = new HashMap<>();
 
+        //get current time in milliseconds
         Long TimeMilli =  System.currentTimeMillis();
         String strFormat = "dd/MM/yyyy";
 
@@ -346,6 +357,7 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
         String strDate = formater.format(calendar.getTime());
 
 
+        //add steps to user object
         user.put(strDate, DaysSteps);
 
 
@@ -371,6 +383,7 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
                     }
                 });
 
+        //reset days steps to 0 to restart count for the day
         DaysSteps = 0;
 
     }
@@ -381,15 +394,18 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
         // check if the request code is same as what is passed  here it is 2
         if(requestCode==2)
         {
-            InsertStepsDB();        }
+            InsertStepsDB();
+        }
     }
 
+    //open the gallery activity
     public void btnGallery(View view) {
 
         Intent intent = new Intent(this, GalleryActivity.class);
         startActivity(intent);
     }
 
+    //open an activity to view and edit goals
     public void View_Goals(View view) {
         Intent intent = new Intent(this, GoalsActivity.class);
         startActivity(intent);
